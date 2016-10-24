@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-dbase install-tmp package move
+all: info install-deps compile-hhvm compile-ext-geoip install-tmp package move
 
 #-------------------------------------------------------------------------------
 
@@ -115,12 +115,13 @@ compile-hhvm:
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
 		make -j $(shell nproc --all) \
 	;
+	chmod +x hhvm/hphp/tools/hphpize/hphpize
 
-.PHONY: compile-ext-dbase
-compile-ext-dbase:
+.PHONY: compile-ext-geoip
+compile-ext-geoip:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1
-	cd hhvm-ext_dbase && \
+	git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1
+	cd hhvm-ext-geoip && \
 		./build.sh \
 	;
 
