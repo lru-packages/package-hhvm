@@ -108,6 +108,7 @@ install-deps:
 
 .PHONY: compile-hhvm
 compile-hhvm:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	git clone -q -b $(COMMIT) https://github.com/facebook/hhvm.git --depth=1
 	cd hhvm && \
 		git submodule update --init --recursive && \
@@ -117,6 +118,7 @@ compile-hhvm:
 
 .PHONY: compile-ext-dbase
 compile-ext-dbase:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1
 	cd hhvm-ext_dbase && \
 		./build.sh \
