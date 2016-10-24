@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack compile-ext-uv package move
+all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack compile-ext-uuid package move
 
 #-------------------------------------------------------------------------------
 
@@ -144,23 +144,20 @@ compile-ext-geoip:
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
+.PHONY: compile-ext-uuid
+compile-ext-uuid:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
+	if [ ! -d "./hhvm-ext-uuid" ]; then git clone -q https://github.com/vipsoft/hhvm-ext-uuid.git --depth=1; fi;
+	cd hhvm-ext-uuid && \
+		./build.sh && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+	;
+
 .PHONY: compile-ext-msgpack
 compile-ext-msgpack:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./msgpack-hhvm" ]; then git clone -q https://github.com/reeze/msgpack-hhvm.git --depth=1; fi;
 	cd msgpack-hhvm && \
-		hphpize && \
-		cmake . && \
-		make && \
-		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
-	;
-
-.PHONY: compile-ext-uv
-compile-ext-uv:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	if [ ! -d "./hhvm-uv" ]; then git clone -q https://github.com/chobie/hhvm-uv.git --recursive --depth=1; fi;
-	cd hhvm-uv && \
-		make -C libuv CFLAGS=-fPIC && \
 		hphpize && \
 		cmake . && \
 		make && \
