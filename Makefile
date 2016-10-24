@@ -42,7 +42,7 @@ info:
 
 .PHONY: clean
 clean:
-	rm -Rf /tmp/installdir* hhvm*
+	rm -Rf /tmp/installdir* hhvm* mongo* msgpack*
 
 #-------------------------------------------------------------------------------
 
