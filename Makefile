@@ -84,6 +84,7 @@ install-deps:
 		libmemcached-devel \
 		libpng-devel \
 		libunwind-devel \
+		libuuid-devel \
 		libvpx-devel \
 		libxml2-devel \
 		libxslt-devel \
@@ -161,6 +162,18 @@ compile-ext-msgpack:
 		hphpize && \
 		cmake . && \
 		make && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+	;
+
+.PHONY: compile-ext-mongodb
+compile-ext-mongodb:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
+	if [ ! -d "./mongo-hhvm-driver" ]; then git clone -q https://github.com/mongodb/mongo-hhvm-driver.git --recursive --depth=1; fi;
+	cd mongo-hhvm-driver && \
+		hphpize && \
+		cmake . && \
+		make configlib && \
+		make -j $(shell nproc --all) && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
