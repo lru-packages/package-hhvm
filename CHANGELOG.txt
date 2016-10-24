@@ -1,0 +1,2 @@
+* Mon Oct 24 2016 Ryan Parman <ryan.parman@wepay.com> 3.15.0-1
+- Bundles HHVM 3.15.
