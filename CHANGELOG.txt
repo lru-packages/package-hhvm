@@ -1,2 +1,6 @@
 * Mon Oct 24 2016 Ryan Parman <ryan@ryanparman.com> 3.15.0-1
-- Bundles HHVM 3.15.
+- Bundles HHVM 3.15.2.
+- Adds dBase extension for HHVM. <https://github.com/skyfms/hhvm-ext_dbase>
+- Adds GeoIP extension for HHVM. <https://github.com/vipsoft/hhvm-ext-geoip>
+- Adds MessagePack extension for HHVM. <https://github.com/reeze/msgpack-hhvm>
+- Adds ssdeep extension for HHVM. <https://github.com/treffynnon/hhvm-ssdeep>
