@@ -11,6 +11,11 @@ URL=https://hhvm.com
 RHEL=$(shell rpm -q --queryformat '%{VERSION}' centos-release)
 COMMIT=$(shell echo "HHVM-$(VERSION)")
 
+# https://docs.hhvm.com/hhvm/installation/building-from-source
+# https://github.com/facebook/hhvm/wiki/Building-and-installing-hhvm-on-CentOS-7.x
+# https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-RHEL-7
+# https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-Amazon-Linux-2014.03
+
 
 #-------------------------------------------------------------------------------
 
@@ -107,7 +112,7 @@ compile:
 	cd hhvm && \
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
-		make -j $(shell nproc --all) && \
+		make -j $(shell nproc --all) \
 	;
 
 #-------------------------------------------------------------------------------
@@ -126,7 +131,7 @@ package:
 	# Main package
 	fpm \
 		-f \
-		-d "$(NAME)-libs = $(EPOCH):$(VERSION)-$(ITERATION).el$(RHEL)" \
+		-d "ocaml" \
 		-s dir \
 		-t rpm \
 		-n $(NAME) \
@@ -149,8 +154,6 @@ package:
 		--rpm-auto-add-directories \
 		usr/local/bin \
 		usr/local/include \
-		usr/local/lib \
-		usr/local/share \
 	;
 
 #-------------------------------------------------------------------------------
