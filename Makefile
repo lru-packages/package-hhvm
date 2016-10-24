@@ -168,17 +168,17 @@ compile-ext-msgpack:
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
-.PHONY: compile-ext-mongodb
-compile-ext-mongodb:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	if [ ! -d "./mongo-hhvm-driver" ]; then git clone -q https://github.com/mongodb/mongo-hhvm-driver.git --recursive --depth=1; fi;
-	cd mongo-hhvm-driver && \
-		hphpize && \
-		cmake . && \
-		make configlib && \
-		make -j $(shell nproc --all) && \
-		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
-	;
+# .PHONY: compile-ext-mongodb
+# compile-ext-mongodb:
+# 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
+# 	if [ ! -d "./mongo-hhvm-driver" ]; then git clone -q https://github.com/mongodb/mongo-hhvm-driver.git --recursive --depth=1; fi;
+# 	cd mongo-hhvm-driver && \
+# 		hphpize && \
+# 		cmake . && \
+# 		make configlib && \
+# 		make -j $(shell nproc --all) && \
+# 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+# 	;
 
 #-------------------------------------------------------------------------------
 
@@ -211,6 +211,8 @@ package:
 		--rpm-auto-add-directories \
 		usr/local/bin \
 		usr/local/include \
+		usr/local/lib64 \
+		usr/local/share \
 	;
 
 #-------------------------------------------------------------------------------
