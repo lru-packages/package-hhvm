@@ -112,7 +112,7 @@ install-deps:
 .PHONY: compile-hhvm
 compile-hhvm:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	git clone -q -b $(COMMIT) https://github.com/facebook/hhvm.git --depth=1
+	if [ ! -d "./hhvm" ]; git clone -q -b $(COMMIT) https://github.com/facebook/hhvm.git --depth=1; fi;
 	cd hhvm && \
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
@@ -124,7 +124,7 @@ compile-hhvm:
 .PHONY: compile-ext-dbase
 compile-ext-dbase:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1
+	if [ ! -d "./hhvm-ext_dbase" ]; git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1; fi;
 	cd hhvm-ext_dbase && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
@@ -133,7 +133,7 @@ compile-ext-dbase:
 .PHONY: compile-ext-geoip
 compile-ext-geoip:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1
+	if [ ! -d "./hhvm-ext-geoip" ]; git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1; fi;
 	cd hhvm-ext-geoip && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
