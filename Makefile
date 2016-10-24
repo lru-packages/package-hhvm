@@ -142,8 +142,8 @@ compile-ext-geoip:
 .PHONY: compile-ext-msgpack
 compile-ext-msgpack:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	if [ ! -d "./hhvm-ext-msgpack" ]; then git clone -q https://github.com/reeze/msgpack-hhvm.git --depth=1; fi;
-	cd hhvm-ext-msgpack && \
+	if [ ! -d "./msgpack-hhvm" ]; then git clone -q https://github.com/reeze/msgpack-hhvm.git --depth=1; fi;
+	cd msgpack-hhvm && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
