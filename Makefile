@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-geoip install-tmp package move
+all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip install-tmp package move
 
 #-------------------------------------------------------------------------------
 
@@ -61,6 +61,8 @@ install-deps:
 		fastlz-devel \
 		fribidi-devel \
 		gcc-c++ \
+		geoip-devel \
+		gflags-devel \
 		git \
 		glib2-devel \
 		glog-devel \
@@ -103,6 +105,7 @@ install-deps:
 		tbb-devel \
 		unixODBC-devel \
 	;
+	mkdir -p /tmp/installdir-$(NAME)-$(VERSION);
 
 #-------------------------------------------------------------------------------
 
@@ -113,25 +116,28 @@ compile-hhvm:
 	cd hhvm && \
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
-		make -j $(shell nproc --all) \
+		make -j $(shell nproc --all) && \
+		make install && \ # For extension installs
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
-	chmod +x hhvm/hphp/tools/hphpize/hphpize
+
+.PHONY: compile-ext-dbase
+compile-ext-dbase:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
+	git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1
+	cd hhvm-ext_dbase && \
+		./build.sh && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+	;
 
 .PHONY: compile-ext-geoip
 compile-ext-geoip:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1
 	cd hhvm-ext-geoip && \
-		./build.sh \
+		./build.sh && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
-
-#-------------------------------------------------------------------------------
-
-.PHONY: install-tmp
-install-tmp:
-	mkdir -p /tmp/installdir-$(NAME)-$(VERSION);
-	cd hhvm && \
-		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION);
 
 #-------------------------------------------------------------------------------
 
