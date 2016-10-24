@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info clean install-deps compile install-tmp package move
+all: info install-deps compile install-tmp package move
 
 #-------------------------------------------------------------------------------
 
@@ -113,6 +113,11 @@ compile:
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
 		make -j $(shell nproc --all) \
+	;
+
+	git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1
+	cd hhvm-ext_dbase && \
+		./build.sh \
 	;
 
 #-------------------------------------------------------------------------------
