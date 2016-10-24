@@ -72,6 +72,7 @@ install-deps:
 		hdf5-1.8.12* \
 		ImageMagick-devel \
 		jemalloc-devel \
+		libbson-devel \
 		libc-client-devel \
 		libcap-devel \
 		libcurl-devel \
@@ -111,6 +112,8 @@ install-deps:
 		tbb-devel \
 		unixODBC-devel \
 	;
+
+	ldconfig
 	mkdir -p /tmp/installdir-$(NAME)-$(VERSION);
 
 #-------------------------------------------------------------------------------
