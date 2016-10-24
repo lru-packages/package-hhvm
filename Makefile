@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip install-tmp package move
+all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack package move
 
 #-------------------------------------------------------------------------------
 
@@ -135,6 +135,15 @@ compile-ext-geoip:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./hhvm-ext-geoip" ]; then git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1; fi;
 	cd hhvm-ext-geoip && \
+		./build.sh && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+	;
+
+.PHONY: compile-ext-msgpack
+compile-ext-msgpack:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
+	if [ ! -d "./hhvm-ext-msgpack" ]; then git clone -q https://github.com/reeze/msgpack-hhvm.git --depth=1; fi;
+	cd hhvm-ext-msgpack && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
