@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack package move
+all: info install-deps compile-hhvm compile-ext-dbase compile-ext-shape compile-ext-geoip compile-ext-msgpack package move
 
 #-------------------------------------------------------------------------------
 
@@ -126,6 +126,15 @@ compile-ext-dbase:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./hhvm-ext_dbase" ]; then git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1; fi;
 	cd hhvm-ext_dbase && \
+		./build.sh && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+	;
+
+.PHONY: compile-ext-shape
+compile-ext-shape:
+	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
+	if [ ! -d "./hhvm-ext_shape" ]; then git clone -q https://github.com/skyfms/hhvm-ext_shape.git --depth=1; fi;
+	cd hhvm-ext_shape && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
