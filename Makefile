@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile install-tmp package move
+all: info install-deps compile-hhvm compile-ext-dbase install-tmp package move
 
 #-------------------------------------------------------------------------------
 
@@ -106,8 +106,8 @@ install-deps:
 
 #-------------------------------------------------------------------------------
 
-.PHONY: compile
-compile:
+.PHONY: compile-hhvm
+compile-hhvm:
 	git clone -q -b $(COMMIT) https://github.com/facebook/hhvm.git --depth=1
 	cd hhvm && \
 		git submodule update --init --recursive && \
@@ -115,6 +115,8 @@ compile:
 		make -j $(shell nproc --all) \
 	;
 
+.PHONY: compile-ext-dbase
+compile-ext-dbase:
 	git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1
 	cd hhvm-ext_dbase && \
 		./build.sh \
