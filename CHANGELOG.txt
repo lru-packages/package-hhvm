@@ -3,4 +3,3 @@
 - Adds dBase extension for HHVM. <https://github.com/skyfms/hhvm-ext_dbase>
 - Adds GeoIP extension for HHVM. <https://github.com/vipsoft/hhvm-ext-geoip>
 - Adds MessagePack extension for HHVM. <https://github.com/reeze/msgpack-hhvm>
-- Adds ssdeep extension for HHVM. <https://github.com/treffynnon/hhvm-ssdeep>

@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack compile-ext-ssdeep package move
+all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack compile-ext-uv package move
 
 #-------------------------------------------------------------------------------
 
@@ -106,6 +106,7 @@ install-deps:
 		shapelib-devel \
 		shapelib-tools \
 		sqlite-devel \
+		ssdeep-devel \
 		tbb-devel \
 		unixODBC-devel \
 	;
@@ -134,15 +135,6 @@ compile-ext-dbase:
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
-# .PHONY: compile-ext-shape
-# compile-ext-shape:
-# 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-# 	if [ ! -d "./hhvm-ext_shape" ]; then git clone -q https://github.com/skyfms/hhvm-ext_shape.git --depth=1; fi;
-# 	cd hhvm-ext_shape && \
-# 		./build.sh && \
-# 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
-# 	;
-
 .PHONY: compile-ext-geoip
 compile-ext-geoip:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
@@ -163,11 +155,12 @@ compile-ext-msgpack:
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
-.PHONY: compile-ext-ssdeep
-compile-ext-ssdeep:
+.PHONY: compile-ext-uv
+compile-ext-uv:
 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
-	if [ ! -d "./hhvm-ssdeep" ]; then git clone -q https://github.com/treffynnon/hhvm-ssdeep.git --depth=1; fi;
-	cd hhvm-ssdeep && \
+	if [ ! -d "./hhvm-uv" ]; then git clone -q https://github.com/chobie/hhvm-uv.git --recursive --depth=1; fi;
+	cd hhvm-uv && \
+		make -C libuv CFLAGS=-fPIC && \
 		hphpize && \
 		cmake . && \
 		make && \
