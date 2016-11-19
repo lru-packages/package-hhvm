@@ -1,3 +1,6 @@
+* Fri Nov 18 2016 Ryan Parman <ryan@ryanparman.com> 3.15.2-2
+- Fixes issues where dependent packages were not being installed correctly.
+
 * Mon Oct 24 2016 Ryan Parman <ryan@ryanparman.com> 3.15.2-1
 - Bundles HHVM 3.15.2.
 - Adds dBase extension for HHVM. <https://github.com/skyfms/hhvm-ext_dbase>
