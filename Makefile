@@ -72,6 +72,7 @@ install-deps:
 		gperf \
 		hdf5-1.8.12* \
 		ImageMagick-devel \
+		inotify-tools-devel \
 		jemalloc-devel \
 		libbson-devel \
 		libc-client-devel \
@@ -85,6 +86,7 @@ install-deps:
 		libmcrypt-devel \
 		libmemcached-devel \
 		libpng-devel \
+		libticonv \
 		libunwind-devel \
 		libuuid-devel \
 		libvpx-devel \
