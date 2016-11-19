@@ -1,7 +1,7 @@
 NAME=hhvm
 VERSION=3.15.2
 EPOCH=1
-ITERATION=1
+ITERATION=2
 PREFIX=/usr/local
 LICENSE=PHP
 VENDOR="Facebook"
@@ -188,7 +188,27 @@ package:
 	# Main package
 	fpm \
 		-f \
+		-d "boost" \
+		-d "double-conversion" \
+		-d "fastlz" \
+		-d "fribidi" \
+		-d "glog" \
+		-d "ImageMagick" \
+		-d "jemalloc" \
+		-d "libc-client" \
+		-d "libjpeg-turbo" \
+		-d "libmcrypt" \
+		-d "libmemcached" \
+		-d "libpng" \
+		-d "libpqxx" \
+		-d "libvpx" \
+		-d "libxslt" \
+		-d "lz4" \
 		-d "ocaml" \
+		-d "oniguruma" \
+		-d "re2" \
+		-d "tbb" \
+		-d "unixODBC" \
 		-s dir \
 		-t rpm \
 		-n $(NAME) \
