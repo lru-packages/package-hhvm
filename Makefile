@@ -52,6 +52,7 @@ install-deps:
 		binutils-devel \
 		boost-devel \
 		bzip2-devel \
+		cmake \
 		cmake3 \
 		cpp \
 		double-conversion-devel \
