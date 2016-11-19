@@ -103,6 +103,7 @@ install-deps:
 		openldap-devel \
 		openssl-devel \
 		pcre-devel \
+		postgresql-devel \
 		psmisc \
 		re2-devel \
 		readline-devel \
