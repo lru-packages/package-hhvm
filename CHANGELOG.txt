@@ -1,3 +1,6 @@
+* Tue Nov 22 2016 Ryan Parman <ryan@ryanparman.com> 3.15.3-1
+- Bundles HHVM 3.15.3.
+
 * Fri Nov 18 2016 Ryan Parman <ryan@ryanparman.com> 3.15.2-2
 - Fixes issues where dependent packages were not being installed correctly.
 
