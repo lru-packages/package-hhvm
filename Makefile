@@ -131,7 +131,8 @@ compile-hhvm:
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
 		make -j $(shell nproc --all) && \
 		make install && \
-		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) && \
+		chmod +x $$(pwd)/hhvm/hphp/tools/hphpize/hphpize \
 	;
 
 .PHONY: compile-ext-dbase
