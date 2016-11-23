@@ -124,9 +124,9 @@ install-deps:
 
 .PHONY: compile-hhvm
 compile-hhvm:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./hhvm" ]; then git clone -q -b $(COMMIT) https://github.com/facebook/hhvm.git --depth=1; fi;
 	cd hhvm && \
+		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
 		make -j $(shell nproc --all) && \
@@ -136,36 +136,36 @@ compile-hhvm:
 
 .PHONY: compile-ext-dbase
 compile-ext-dbase:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./hhvm-ext_dbase" ]; then git clone -q https://github.com/skyfms/hhvm-ext_dbase.git --depth=1; fi;
 	cd hhvm-ext_dbase && \
+		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
 .PHONY: compile-ext-geoip
 compile-ext-geoip:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./hhvm-ext-geoip" ]; then git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1; fi;
 	cd hhvm-ext-geoip && \
+		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
 .PHONY: compile-ext-uuid
 compile-ext-uuid:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./hhvm-ext-uuid" ]; then git clone -q https://github.com/vipsoft/hhvm-ext-uuid.git --depth=1; fi;
 	cd hhvm-ext-uuid && \
+		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		./build.sh && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
 .PHONY: compile-ext-msgpack
 compile-ext-msgpack:
-	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 	if [ ! -d "./msgpack-hhvm" ]; then git clone -q https://github.com/reeze/msgpack-hhvm.git --depth=1; fi;
 	cd msgpack-hhvm && \
+		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		hphpize && \
 		cmake . && \
 		make && \
@@ -174,9 +174,9 @@ compile-ext-msgpack:
 
 # .PHONY: compile-ext-mongodb
 # compile-ext-mongodb:
-# 	export HPHP_HOME=$(shell echo "$$(pwd)/hhvm")
 # 	if [ ! -d "./mongo-hhvm-driver" ]; then git clone -q https://github.com/mongodb/mongo-hhvm-driver.git --recursive --depth=1; fi;
 # 	cd mongo-hhvm-driver && \
+#		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 # 		hphpize && \
 # 		cmake . && \
 # 		make configlib && \
