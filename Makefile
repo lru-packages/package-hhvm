@@ -130,7 +130,7 @@ compile-hhvm:
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
 		make -j $(shell nproc --all) && \
-		make install && \ # For extension installs
+		make install && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
