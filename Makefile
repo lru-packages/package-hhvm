@@ -132,7 +132,7 @@ compile-hhvm:
 		make -j $(shell nproc --all) && \
 		make install && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) && \
-		chmod +x $$(pwd)/hhvm/hphp/tools/hphpize/hphpize \
+		chmod +x $$(pwd)/hphp/tools/hphpize/hphpize \
 	;
 
 .PHONY: compile-ext-dbase
