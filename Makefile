@@ -19,7 +19,7 @@ COMMIT=$(shell echo "HHVM-$(VERSION)")
 
 #-------------------------------------------------------------------------------
 
-all: info install-deps compile-hhvm compile-ext-dbase compile-ext-geoip compile-ext-msgpack compile-ext-uuid package move
+all: info install-deps compile-hhvm compile-ext-dbase compile-ext-msgpack compile-ext-uuid package move
 
 #-------------------------------------------------------------------------------
 
