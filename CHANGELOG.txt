@@ -1,3 +1,6 @@
+* Thu Feb 16 2017 Ryan Parman <ryan@ryanparman.com> 3.18.0-1
+- Bundles HHVM 3.18.0.
+
 * Tue Feb 7 2017 Ryan Parman <ryan@ryanparman.com> 3.17.2-1
 - Bundles HHVM 3.17.2.
 - Removed the GeoIP extension because it would not compile.
