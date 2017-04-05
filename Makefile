@@ -1,5 +1,5 @@
 NAME=hhvm
-VERSION=3.18.1
+VERSION=3.18.2
 EPOCH=1
 ITERATION=1
 PREFIX=/usr/local
@@ -144,14 +144,14 @@ compile-ext-dbase:
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
 	;
 
-# .PHONY: compile-ext-geoip
-# compile-ext-geoip:
-# 	if [ ! -d "./hhvm-ext-geoip" ]; then git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1; fi;
-# 	cd hhvm-ext-geoip && \
-# 		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
-# 		./build.sh && \
-# 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
-# 	;
+.PHONY: compile-ext-geoip
+compile-ext-geoip:
+	if [ ! -d "./hhvm-ext-geoip" ]; then git clone -q https://github.com/vipsoft/hhvm-ext-geoip.git --depth=1; fi;
+	cd hhvm-ext-geoip && \
+		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
+		./build.sh && \
+		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) \
+	;
 
 .PHONY: compile-ext-uuid
 compile-ext-uuid:
