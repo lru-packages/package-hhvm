@@ -127,7 +127,6 @@ compile-hhvm:
 		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		git submodule update --init --recursive && \
 		cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
-		make && \
 		make install && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) && \
 		chmod +x $$(pwd)/hphp/tools/hphpize/hphpize \
