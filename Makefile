@@ -126,7 +126,10 @@ compile-hhvm:
 	cd hhvm && \
 		export HPHP_HOME=$(shell echo "$$(pwd)/hhvm") && \
 		git submodule update --init --recursive && \
-		cmake -DCMAKE_CXX_COMPILER=/usr/local/bin/g++ -DCMAKE_C_COMPILER=/usr/local/bin/gcc -DCMAKE_C_COMPILER=/usr/local/bin/gcc -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
+		export CC=/usr/local/bin/gcc && \
+		export CXX=/usr/local/bin/g++ && \
+		export ASM=/usr/local/bin/g++ && \
+		cmake -DCMAKE_CXX_COMPILER=/usr/local/bin/g++ -DCMAKE_C_COMPILER=/usr/local/bin/gcc -DCMAKE_ASM_COMPILER=/usr/local/bin/gcc -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock . && \
 		make install && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION) && \
 		chmod +x $$(pwd)/hphp/tools/hphpize/hphpize \
