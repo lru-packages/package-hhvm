@@ -1,5 +1,7 @@
 # package-hhvm
 
+> **NOTE:** I don't use HHVM anymore — especially since they shifted their focus from PHP 7.x to Hacklang — so I will no longe r be maintaining this package. It's _mostly_ there, but since newer versions of HHVM source require a newer version of GCC than what comes with CentOS 7, I'm not enough of a C/C++ developer to fix the compilation issues I'm running into. If someone wants to provide a patch for the `Makefile`, I'd be happy to rebuild an RPM.
+
 HHVM is an alternative PHP runtime developed by Facebook which aims to speed-up runtime performance, and implements a few new features. <https://hhvm.com>
 
 See <https://github.com/facebook/hhvm/releases> for releases.
