@@ -1,3 +1,6 @@
+* Thu Nov 23 2017 Ryan Parman <ryan@ryanparman.com> 3.23.2-1
+- Bundles HHVM 3.23.2.
+
 * Sun Aug 6 2017 Ryan Parman <ryan@ryanparman.com> 3.21.0-1
 - Bundles HHVM 3.21.0.
 
